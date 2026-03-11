@@ -1,0 +1,33 @@
+{
+  "name": "cse_341_team13",
+  "version": "1.0.0",
+  "description": "This is an independent project that you will complete as you do your personal assignments for lessons 5-8 in this course.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+  "dev": "nodemon server.js",
+  "swagger": "node swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zackadoodledoo/CSE_341_Team13.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zackadoodledoo/CSE_341_Team13/issues"
+  },
+  "homepage": "https://github.com/zackadoodledoo/CSE_341_Team13#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.4",
+    "nodemon": "^3.1.14",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
