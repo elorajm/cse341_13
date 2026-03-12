@@ -1,6 +1,7 @@
 {
   "name": "cse_341_team13",
   "version": "1.0.0",
+  "type" : "module",
   "description": "This is an independent project that you will complete as you do your personal assignments for lessons 5-8 in this course.",
   "main": "server.js",
   "scripts": {
@@ -16,7 +17,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/zackadoodledoo/CSE_341_Team13/issues"
   },

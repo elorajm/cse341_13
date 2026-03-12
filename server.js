@@ -1,8 +1,9 @@
+import 'dotenv/config.js';
 import express from "express";
-import mongodb from "./connect.js";
+import { connectDB } from "./db/connect.js";
 import routes from "./routes/index.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./swagger.json" assert { type: "json" };
+import swaggerDocument from "./swagger.json" with { type: "json" };
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,12 +14,10 @@ app.use("/api", routes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port, () => {
-      console.log(`Database connected and server running on port ${port}`);
-    });
-  }
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Database connected and server running on port ${port}`);
+  });
+}).catch((err) => {
+  console.log(err);
 });
