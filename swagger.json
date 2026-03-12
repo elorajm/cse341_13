@@ -9,7 +9,7 @@
     }
   },
   "host": "localhost:3000",
-  "basePath": "/api",
+  "basePath": "/",
   "schemes": [
     "http"
   ],
@@ -20,7 +20,7 @@
     "application/json"
   ],
   "paths": {
-    "/races/": {
+    "/api/races/": {
       "get": {
         "description": "",
         "responses": {
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/": {
+    "/api/workouts/": {
       "get": {
         "description": "",
         "responses": {
@@ -100,13 +100,22 @@
                 "date": {
                   "example": "any"
                 },
+                "duration": {
+                  "example": "any"
+                },
+                "intensity": {
+                  "example": "any"
+                },
+                "difficulty": {
+                  "example": "any"
+                },
+                "repCount": {
+                  "example": "any"
+                },
                 "location": {
                   "example": "any"
                 },
-                "distance": {
-                  "example": "any"
-                },
-                "description": {
+                "comment": {
                   "example": "any"
                 }
               }

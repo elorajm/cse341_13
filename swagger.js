@@ -10,7 +10,7 @@ const doc = {
     },
   },
   host: 'localhost:3000',
-  basePath: '/api',
+  basePath: '/',
   schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],
@@ -18,10 +18,7 @@ const doc = {
 
 const outputFile = './swagger.json';
 const routes = [
-  './routes/index.js',
-  './routes/races.js',
-  './routes/recipes.js',
-  './routes/workouts.js',
+  './server.js',
 ];
 
 swaggerAutogen()(outputFile, routes, doc).then(() => {
