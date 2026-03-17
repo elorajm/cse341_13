@@ -34,8 +34,8 @@ export const createRecipe = async (req, res) => {
       comment,
     });
 
-  const savedRecipe = await newRecipe = await newRecipe.save();
-    res,status(201).json(savedRecipe);
+    const savedRecipe = await newRecipe.save();
+    res.status(201).json(savedRecipe);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
