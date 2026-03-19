@@ -28,7 +28,7 @@ YouTube video demonstration of roughly 1 minute demonstrating each API route in 
 Submit the following links in I-learn: GitHub repo, Render site, and YouTube video.
 
 ### Github
-<... ... ... ...>
+<https://github.com/zackadoodledoo/CSE_341_Team13>
 
 
 
