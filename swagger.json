@@ -131,10 +131,12 @@
     },
     "/api/workouts/": {
       "get": {
+        "tags": ["Workouts"],
+        "summary": "Get all workouts",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all workouts"
           },
           "500": {
             "description": "Internal Server Error"
@@ -142,48 +144,127 @@
         }
       },
       "post": {
+        "tags": ["Workouts"],
+        "summary": "Create a new workout",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                },
-                "duration": {
-                  "example": "any"
-                },
-                "intensity": {
-                  "example": "any"
-                },
-                "difficulty": {
-                  "example": "any"
-                },
-                "repCount": {
-                  "example": "any"
-                },
-                "location": {
-                  "example": "any"
-                },
-                "comment": {
-                  "example": "any"
-                }
+                "name": { "example": "Morning Run" },
+                "date": { "example": "2026-03-11" },
+                "duration": { "example": 30 },
+                "intensity": { "example": 7 },
+                "difficulty": { "example": "MED" },
+                "repCount": { "example": 0 },
+                "location": { "example": "City Park" },
+                "comment": { "example": "Felt good today" }
               }
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Workout created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Missing required fields"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/workouts/{id}": {
+      "get": {
+        "tags": ["Workouts"],
+        "summary": "Get a workout by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout found"
+          },
+          "404": {
+            "description": "Workout not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Workouts"],
+        "summary": "Update a workout by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "example": "Evening Run" },
+                "date": { "example": "2026-03-11" },
+                "duration": { "example": 45 },
+                "intensity": { "example": 8 },
+                "difficulty": { "example": "HARD" },
+                "repCount": { "example": 0 },
+                "location": { "example": "Track" },
+                "comment": { "example": "Pushed harder today" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout updated successfully"
+          },
+          "404": {
+            "description": "Workout not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Workouts"],
+        "summary": "Delete a workout by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout deleted successfully"
+          },
+          "404": {
+            "description": "Workout not found"
           },
           "500": {
             "description": "Internal Server Error"

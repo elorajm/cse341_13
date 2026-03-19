@@ -4,7 +4,7 @@ import Recipe from '../models/recipe.js';
 */
 export const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipes.find();
+    const recipes = await Recipe.find();
     res.status(200).json(recipes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -34,8 +34,8 @@ export const createRecipe = async (req, res) => {
       comment,
     });
 
-  const savedRecipe = await newRecipe = await newRecipe.save();
-    res,status(201).json(savedRecipe);
+    const savedRecipe = await newRecipe.save();
+    res.status(201).json(savedRecipe);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

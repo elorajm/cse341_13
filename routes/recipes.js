@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', getAllRecipes);
 
-rouer.post('/', createRecipe);
+router.post('/', createRecipe);
 
 export default router;
