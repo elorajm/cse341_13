@@ -1,5 +1,6 @@
 import express from 'express';
 import { getAllRaces, createRace, getRaceById, updateRace, deleteRace } from '../Controllers/races.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.get('/', getAllRaces);
  * #swagger.responses[201] = { description: 'Race created successfully' }
  * #swagger.responses[400] = { description: 'Missing required fields' }
  */
-router.post('/', createRace);
+router.post('/', auth, createRace);
 
 /**
  * GET /api/races/{id}
@@ -61,7 +62,7 @@ router.get('/:id', getRaceById);
  * #swagger.responses[400] = { description: 'No fields provided to update' }
  * #swagger.responses[404] = { description: 'Race not found' }
  */
-router.put('/:id', updateRace);
+router.put('/:id', auth, updateRace);
 
 /**
  * DELETE /api/races/{id}
@@ -71,6 +72,6 @@ router.put('/:id', updateRace);
  * #swagger.responses[200] = { description: 'Race deleted successfully' }
  * #swagger.responses[404] = { description: 'Race not found' }
  */
-router.delete('/:id', deleteRace);
+router.delete('/:id', auth, deleteRace);
 
 export default router;
