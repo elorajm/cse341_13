@@ -1,5 +1,6 @@
 import express from 'express';
 import { getAllWorkouts, getWorkoutById, createWorkout, updateWorkout, deleteWorkout } from '../Controllers/workouts.js';
+import auth from '../middleware/auth.js';
 const router = express.Router();
 /**
  * GET /api/workouts
@@ -29,7 +30,7 @@ router.get('/', getAllWorkouts);
  * #swagger.responses[201] = { description: 'Workout created successfully' }
  * #swagger.responses[400] = { description: 'Missing required fields' }
  */
-router.post('/', createWorkout);
+router.post('/', auth, createWorkout);
 /**
  * GET /api/workouts/:id
  * #swagger.tags = ['Workouts']
@@ -59,7 +60,7 @@ router.get('/:id', getWorkoutById);
  * #swagger.responses[200] = { description: 'Workout updated successfully' }
  * #swagger.responses[404] = { description: 'Workout not found' }
  */
-router.put('/:id', updateWorkout);
+router.put('/:id', auth, updateWorkout);
 /**
  * DELETE /api/workouts/:id
  * #swagger.tags = ['Workouts']
@@ -67,5 +68,5 @@ router.put('/:id', updateWorkout);
  * #swagger.responses[200] = { description: 'Workout deleted successfully' }
  * #swagger.responses[404] = { description: 'Workout not found' }
  */
-router.delete('/:id', deleteWorkout);
+router.delete('/:id', auth, deleteWorkout);
 export default router;
