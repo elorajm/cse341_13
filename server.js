@@ -1,4 +1,11 @@
 import 'dotenv/config.js';
+app.use(cors());
+app.use(express.json());
+
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 import express from "express";
 import cors from "cors";
 import session from "express-session";
@@ -37,13 +44,32 @@ app.use(passport.session());
 app.use("/auth", authRouter);
 app.use("/api", routes);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+/* ======================
+   Routes
+====================== */
+app.use('/api', routes);
 
-app.use('/api/recipes', recipesRouter);
+/* ======================
+   Swagger Docs
+====================== */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-connectDB().then(() => {
+/* ======================
+   Server Startup
+====================== */
+if (process.env.MONGO_URI) {
+  connectDB()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Server running WITH database on port ${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Database connection failed:', err);
+    });
+} else {
   app.listen(port, () => {
-    console.log(`Database connected and server running on port ${port}`);
+    console.log(`Server running WITHOUT database on port ${port}`);
   });
 }).catch((err) => {
   console.log(err);

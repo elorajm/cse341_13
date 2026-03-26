@@ -146,10 +146,12 @@
     },
     "/api/recipes/": {
       "get": {
+        "tags": ["Recipes"],
+        "summary": "Get all recipes",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List all recipes"
           },
           "500": {
             "description": "Internal Server Error"
@@ -157,25 +159,36 @@
         }
       },
       "post": {
+        "tags": ["Recipes"],
+        "summary": "Create a new recipe",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "example": "Tacos"
                 },
                 "date": {
                   "example": "any"
                 },
                 "ingredients": {
-                  "example": "any"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "example": "Beef" },
+                      "amount": { "example": "300g" }
+                    }
+                  }
                 },
                 "directions": {
-                  "example": "any"
+                  "type": "array",
+                  "items": { "example": "Cook beef" }
                 },
                 "calories": {
                   "example": "any"
@@ -200,6 +213,106 @@
         }
       }
     },
+    "/api/recipes/{id}": {
+  "get": {
+    "tags": ["Recipes"],
+    "summary": "Get a recipe by ID",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Recipe found"
+      },
+      "404": {
+        "description": "Recipe not found"
+      },
+      "500": {
+        "description": "Internal Server Error"
+      }
+    }
+  },
+  "put": {
+    "tags": ["Recipes"],
+    "summary": "Update a recipe by ID",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": { "example": "Updated Recipe Name" },
+            "ingredients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "example": "Ingredient" },
+                  "amount": { "example": "1 cup" }
+                }
+              }
+            },
+            "directions": {
+              "type": "array",
+              "items": { "example": "Step description" }
+            },
+            "calories": { "example": "500" },
+            "taste": { "example": "Savory" },
+            "comment": { "example": "Updated comment" }
+          }
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Recipe updated successfully"
+      },
+      "404": {
+        "description": "Recipe not found"
+      },
+      "500": {
+        "description": "Internal Server Error"
+      }
+    }
+  },
+  "delete": {
+    "tags": ["Recipes"],
+    "summary": "Delete a recipe by ID",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Recipe deleted successfully"
+      },
+      "404": {
+        "description": "Recipe not found"
+      },
+      "500": {
+        "description": "Internal Server Error"
+      }
+    }
+  }
+},
+
     "/api/workouts/": {
       "get": {
         "tags": ["Workouts"],

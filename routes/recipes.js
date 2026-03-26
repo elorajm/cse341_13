@@ -1,4 +1,3 @@
-// routes/recipes.js
 import express from 'express';
 import {
   getAllRecipes,
@@ -10,6 +9,15 @@ import {
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
+
+router.get('/__test', (req, res) => {
+  res.send('recipes router is alive');
+});
+
+import { getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipe} from '../Controllers/recipes.js';
+import validateRecipe from '../middleware/validateRecipe.js';
+
+
 
 router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);

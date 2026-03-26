@@ -9,4 +9,6 @@ router.use('/races', racesRoutes);
 router.use('/recipes', recipesRoutes);
 router.use('/workouts', workoutsRoutes);
 
+console.log("ROUTES INDEX LOADED");
+
 export default router;

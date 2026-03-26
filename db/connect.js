@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export const connectDB = async () => {
+  if (!process.env.MONGODB_URI) {
+    console.log('No MONGODB_URI provided — skipping database connection');
+    return;
+  }
+
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("MongoDB connected");
+    console.log('MongoDB connected');
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error('MongoDB connection failed:', err);
   }
 };
