@@ -1,19 +1,4 @@
 import 'dotenv/config.js';
-import express from 'express';
-import cors from 'cors';
-import routes from './routes/index.js';
-import swaggerUi from 'swagger-ui-express';
-import { connectDB } from './db/connect.js';
-import fs from 'fs';
-
-const app = express();
-const port = process.env.PORT || 3000;
-const swaggerDocument = JSON.parse(
-  fs.readFileSync('./swagger.json', 'utf-8')
-);
-/* ======================
-   Global Middleware
-====================== */
 app.use(cors());
 app.use(express.json());
 
@@ -21,6 +6,43 @@ app.get('/ping', (req, res) => {
   res.status(200).send('pong');
 });
 
+import express from "express";
+import cors from "cors";
+import session from "express-session";
+import passport from "passport";
+import "./config/passport.js";
+import { connectDB } from "./db/connect.js";
+import routes from "./routes/index.js";
+import authRouter from "./routes/auth.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json" with { type: "json" };
+import recipesRouter from './routes/recipes.js';
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.set('trust proxy', 1);
+
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/auth", authRouter);
+app.use("/api", routes);
 
 /* ======================
    Routes
@@ -49,4 +71,6 @@ if (process.env.MONGO_URI) {
   app.listen(port, () => {
     console.log(`Server running WITHOUT database on port ${port}`);
   });
-}
+}).catch((err) => {
+  console.log(err);
+});

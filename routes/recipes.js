@@ -1,4 +1,13 @@
 import express from 'express';
+import {
+  getAllRecipes,
+  getRecipeById,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe
+} from '../Controllers/recipes.js';
+import auth from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.get('/__test', (req, res) => {
@@ -12,8 +21,8 @@ import validateRecipe from '../middleware/validateRecipe.js';
 
 router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);
-router.post('/', createRecipe);
-router.put('/:id', updateRecipe);
-router.delete('/:id', deleteRecipe);
+router.post('/', auth, createRecipe);
+router.put('/:id', auth, updateRecipe);
+router.delete('/:id', auth, deleteRecipe);
 
 export default router;
