@@ -1,0 +1,70 @@
+# Recipe API – Local REST Tests
+# Safe for local development only
+
+
+# Working tests
+
+### Get all recipes
+GET http://localhost:3000/api/recipes 
+
+
+### Create recipe
+POST http://localhost:3000/api/recipes
+Content-Type: application/json
+
+{
+  "name": "Tacos",
+  "ingredients": [
+    { "name": "Tortillas", "amount": "4" },
+    { "name": "Beef", "amount": "300g" }
+  ],
+  "directions": [
+    "Cook beef",
+    "Warm tortillas",
+    "Assemble tacos"
+  ],
+  "prepTime": 10,
+  "cookTime": 15,
+  "servings": 2,
+  "tags": ["mexican"]
+}
+
+### Update recipe 
+PUT http://localhost:3000/api/recipes/69c492cf09f8760060131f40
+Content-Type: application/json
+
+{
+  "name": "Updated Tacos",
+  "cookTime": 20,
+  "tags": ["mexican", "updated"],
+  "comment": "Now even better"
+}
+
+
+
+### Delete recipe by ID
+DELETE http://localhost:3000/api/recipes/69c44f55952a3434fd42efa6
+
+
+### Update recipe - example
+PUT http://localhost:3000/api/recipes/<PASTE_RECIPE_ID_HERE>
+Content-Type: application/json
+
+{
+  "name": "Updated Tacos",
+  "cookTime": 20,
+  "tags": ["mexican", "updated"],
+  "comment": "Now even better"
+}
+
+
+
+### Delete recipe by ID - example
+DELETE http://localhost:3000/api/recipes/<PASTE_RECIPE_ID_HERE>
+
+
+
+
+### Ping Test - success = "pong"
+GET http://localhost:3000/ping
+

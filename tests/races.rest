@@ -1,0 +1,18 @@
+# Races API – Local REST Tests
+# Safe for local development only
+
+### Get all races 
+
+GET http://localhost:3000/api/races
+
+
+### Create new race
+
+POST http://localhost:3000/api/races
+
+Content-Type: application/json
+
+{
+    
+}
+

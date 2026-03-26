@@ -1,0 +1,5 @@
+# Workouts API – Local REST Tests
+# Safe for local development only
+
+### Get all workouts
+
