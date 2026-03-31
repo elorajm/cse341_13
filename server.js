@@ -50,7 +50,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 /* ======================
    Server Startup
 ====================== */
-if (process.env.MONGO_URI) {
+if (process.env.MONGODB_URI) {
   connectDB()
     .then(() => {
       app.listen(port, () => {
