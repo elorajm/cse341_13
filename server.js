@@ -1,4 +1,6 @@
 import 'dotenv/config.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import express from "express";
 import cors from "cors";
 import session from "express-session";
@@ -11,6 +13,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" with { type: "json" };
 import recipesRouter from './routes/recipes.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -18,6 +23,7 @@ app.set('trust proxy', 1);
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   session({
