@@ -9,9 +9,9 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 // GitHub callback
 router.get(
   '/github/callback',
-  passport.authenticate('github', { failureRedirect: '/auth/profile' }),
+  passport.authenticate('github', { failureRedirect: '/' }),
   (_req, res) => {
-    res.redirect('/auth/profile');
+    res.redirect('/');
   }
 );
 
@@ -27,7 +27,7 @@ router.get('/profile', (req, res) => {
 router.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect('/auth/profile');
+    res.redirect('/');
   });
 });
 
