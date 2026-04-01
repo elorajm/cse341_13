@@ -9,7 +9,7 @@ const doc = {
       name: 'Team 13',
     },
   },
-  host: 'race-tracker-api.onrender.com',
+  host: 'cse341-13.onrender.com',
   basePath: '/',
   schemes: ['https'],
   consumes: ['application/json'],

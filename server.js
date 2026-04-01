@@ -11,7 +11,6 @@ import routes from "./routes/index.js";
 import authRouter from "./routes/auth.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" with { type: "json" };
-import recipesRouter from './routes/recipes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -42,11 +41,6 @@ app.use(passport.session());
 
 app.use("/auth", authRouter);
 app.use("/api", routes);
-
-/* ======================
-   Routes
-====================== */
-app.use('/api', routes);
 
 /* ======================
    Swagger Docs
