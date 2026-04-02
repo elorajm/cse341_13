@@ -34,6 +34,7 @@ https://github.com/elorajm/cse341_13
 
 ### Render Link
 <https://cse341-13.onrender.com>
+https://cse341-13.onrender.com/api-docs/
 
 
 
