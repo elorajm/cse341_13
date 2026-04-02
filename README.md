@@ -28,13 +28,12 @@ YouTube video demonstration of roughly 1 minute demonstrating each API route in 
 Submit the following links in I-learn: GitHub repo, Render site, and YouTube video.
 
 ### Github
-<https://github.com/zackadoodledoo/CSE_341_Team13>
 https://github.com/elorajm/cse341_13
 
 
 
 ### Render Link
-<... ... ... ...>
+<https://cse341-13.onrender.com>
 
 
 
@@ -69,7 +68,7 @@ Elora Mathias
 
 ### Github Git Clone
 
-https://github.com/zackadoodledoo/CSE_341_Team13.git
+https://github.com/elorajm/cse341_13.git
 
 ### 2.18.2026 Initial
 

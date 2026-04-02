@@ -1,6 +1,7 @@
 import express from 'express';
 import { getAllRaces, createRace, getRaceById, updateRace, deleteRace } from '../Controllers/races.js';
 import auth from '../middleware/auth.js';
+import validateRace from '../middleware/validateRace.js';
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get('/', getAllRaces);
  * #swagger.responses[201] = { description: 'Race created successfully' }
  * #swagger.responses[400] = { description: 'Missing required fields' }
  */
-router.post('/', auth, createRace);
+router.post('/', auth, validateRace, createRace);
 
 /**
  * GET /api/races/{id}

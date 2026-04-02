@@ -1,6 +1,7 @@
 import express from 'express';
 import { getAllWorkouts, getWorkoutById, createWorkout, updateWorkout, deleteWorkout } from '../Controllers/workouts.js';
 import auth from '../middleware/auth.js';
+import validateWorkout from '../middleware/validateWorkout.js';
 const router = express.Router();
 /**
  * GET /api/workouts
@@ -30,7 +31,7 @@ router.get('/', getAllWorkouts);
  * #swagger.responses[201] = { description: 'Workout created successfully' }
  * #swagger.responses[400] = { description: 'Missing required fields' }
  */
-router.post('/', auth, createWorkout);
+router.post('/', auth, validateWorkout, createWorkout);
 /**
  * GET /api/workouts/:id
  * #swagger.tags = ['Workouts']
