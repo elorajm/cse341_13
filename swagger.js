@@ -14,6 +14,11 @@ const doc = {
   schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
+  tags: [
+    { name: 'Races',    description: 'Endpoints for managing races'    },
+    { name: 'Recipes',  description: 'Endpoints for managing recipes'  },
+    { name: 'Workouts', description: 'Endpoints for managing workouts' },
+  ],
 };
 
 const outputFile = './swagger.json';

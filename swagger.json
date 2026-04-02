@@ -10,6 +10,20 @@
   },
   "host": "cse341-13.onrender.com",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Races",
+      "description": "Endpoints for managing races"
+    },
+    {
+      "name": "Recipes",
+      "description": "Endpoints for managing recipes"
+    },
+    {
+      "name": "Workouts",
+      "description": "Endpoints for managing workouts"
+    }
+  ],
   "schemes": [
     "https"
   ],
@@ -65,39 +79,53 @@
     },
     "/api/races/": {
       "get": {
+        "tags": [
+          "Races"
+        ],
+        "summary": "Get all races",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all races"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Races"
+        ],
+        "summary": "Create a new race",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Sample Race"
                 },
                 "date": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2026-03-15"
                 },
                 "location": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Salt Lake City"
                 },
                 "distance": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 5
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "A fun 5k race"
                 }
               }
             }
@@ -105,10 +133,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Race created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Missing required fields"
+          },
+          "401": {
+            "description": "Login required"
           },
           "500": {
             "description": "Internal Server Error"
@@ -118,46 +149,89 @@
     },
     "/api/races/{id}": {
       "get": {
+        "tags": [
+          "Races"
+        ],
+        "summary": "Get a race by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Race ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Race found"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Race not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Races"
+        ],
+        "summary": "Update a race by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Race ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Updated Race Name"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2026-03-20"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "New Location"
+                },
+                "distance": {
+                  "type": "number",
+                  "example": 10
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Updated description"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Race updated successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "No fields provided to update"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Race not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -165,21 +239,29 @@
         }
       },
       "delete": {
+        "tags": [
+          "Races"
+        ],
+        "summary": "Delete a race by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Race ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Race deleted successfully"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Race not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -199,27 +281,102 @@
     },
     "/api/recipes/": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get all recipes",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all recipes"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Create a new recipe",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "createdBy": {
-                  "example": "any"
+                "name": {
+                  "type": "string",
+                  "example": "Tacos"
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Cheese"
+                      },
+                      "amount": {
+                        "type": "string",
+                        "example": "1 cup"
+                      }
+                    }
+                  }
+                },
+                "directions": {
+                  "type": "array",
+                  "example": [
+                    "Brown the beef",
+                    "Warm the tortillas",
+                    "Assemble and serve"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "calories": {
+                  "type": "string",
+                  "example": "450"
+                },
+                "taste": {
+                  "type": "string",
+                  "example": "Savory"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "Quick weeknight dinner"
+                },
+                "prepTime": {
+                  "type": "number",
+                  "example": 10
+                },
+                "cookTime": {
+                  "type": "number",
+                  "example": 20
+                },
+                "servings": {
+                  "type": "number",
+                  "example": 4
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "mexican",
+                    "dinner"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "example": "https://example.com/tacos.jpg"
                 }
               }
             }
@@ -227,126 +384,193 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Recipe created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Validation error or missing required fields"
+          },
+          "401": {
+            "description": "Login required"
           }
         }
       }
     },
     "/api/recipes/{id}": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Recipe found"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Recipe not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Update a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Updated Tacos"
+                },
+                "calories": {
+                  "type": "string",
+                  "example": "500"
+                },
+                "servings": {
+                  "type": "number",
+                  "example": 6
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "Updated with extra cheese"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Recipe updated successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Recipe not found"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Delete a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Recipe deleted successfully"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Recipe not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       }
     },
     "/api/workouts/": {
       "get": {
+        "tags": [
+          "Workouts"
+        ],
+        "summary": "Get all workouts",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all workouts"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Workouts"
+        ],
+        "summary": "Create a new workout",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Morning Run"
                 },
                 "date": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2026-03-11"
                 },
                 "duration": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 30
                 },
                 "intensity": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 7
                 },
                 "difficulty": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "MED"
                 },
                 "repCount": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 0
                 },
                 "location": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "City Park"
                 },
                 "comment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Felt good today"
                 }
               }
             }
@@ -354,10 +578,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Workout created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Missing required fields"
+          },
+          "401": {
+            "description": "Login required"
           },
           "500": {
             "description": "Internal Server Error"
@@ -367,43 +594,98 @@
     },
     "/api/workouts/{id}": {
       "get": {
+        "tags": [
+          "Workouts"
+        ],
+        "summary": "Get a workout by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Workout ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Workout found"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Workout not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Workouts"
+        ],
+        "summary": "Update a workout by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Workout ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Evening Run"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2026-03-11"
+                },
+                "duration": {
+                  "type": "number",
+                  "example": 45
+                },
+                "intensity": {
+                  "type": "number",
+                  "example": 8
+                },
+                "difficulty": {
+                  "type": "string",
+                  "example": "HARD"
+                },
+                "repCount": {
+                  "type": "number",
+                  "example": 0
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Track"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "Pushed harder today"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Workout updated successfully"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Workout not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -411,21 +693,29 @@
         }
       },
       "delete": {
+        "tags": [
+          "Workouts"
+        ],
+        "summary": "Delete a workout by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Workout ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Workout deleted successfully"
+          },
+          "401": {
+            "description": "Login required"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Workout not found"
           },
           "500": {
             "description": "Internal Server Error"
